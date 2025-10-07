@@ -1,0 +1,63 @@
+using System;
+using System.Collections.Generic;
+
+
+interface IShape
+{
+    void Draw();
+}
+
+
+interface IColoredShape : IShape
+{
+    void SetColor(string color);
+}
+
+
+class Circle : IColoredShape
+{
+    public string Color { get; private set; }
+    public double Radius { get; private set; }
+
+    public Circle(double radius, string color)
+    {
+        Radius = radius;
+        SetColor(color);
+    }
+
+    public void SetColor(string color)
+    {
+        Color = color;
+    }
+
+    public void Draw()
+    {
+        Console.WriteLine($"Коло: радіус = {Radius}, колір = {Color}");
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+     
+        List<IShape> shapes = new List<IShape>
+        {
+            new Circle(5, "Червоний"),
+            new Circle(3.2, "Синій"),
+            new Circle(7.5, "Зелений"),
+            new Circle(2.8, "Жовтий")
+        };
+
+        Console.WriteLine("Список кольорових кіл:\n");
+
+      
+        foreach (var shape in shapes)
+        {
+            shape.Draw();
+        }
+
+        Console.WriteLine("\nНатисніть будь-яку клавішу для виходу...");
+        Console.ReadKey();
+    }
+}
